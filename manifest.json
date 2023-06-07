@@ -1,0 +1,13 @@
+{
+  "name": "Assets export tool",
+  "id": "1248287378662234880",
+  "api": "1.0.0",
+  "main": "dist/code.js",
+  "capabilities": [],
+  "enableProposedApi": false,
+  "editorType": ["figma"],
+  "ui": "dist/ui.html",
+  "networkAccess": {
+    "allowedDomains": ["none"]
+  }
+}

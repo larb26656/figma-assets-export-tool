@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+  font-family: "Noto Sans Thai", sans-serif;
+}
+
+.header-section {
+  padding: 16px;
+  background-color: #000000;
+}
+
+.header-section > .title {
+  size: 16px;
+  color: #ffffff;
+  text-align: right;
+}
+
+.content-section {
+  padding: 16px;
+  text-align: center;
+}
+
+.btn {
+  display: inline-block;
+  padding: 15px 32px;
+  border: none;
+  border-radius: 5px;
+  background-color: #000000; /* Green */
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.space-1 {
+  margin-bottom: 16px;
+}
