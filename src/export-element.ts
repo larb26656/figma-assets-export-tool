@@ -1,13 +1,12 @@
+import { ExportOption } from './export-option';
+
 export class ExportElement {
-  type: string | 'SVG' | 'PNG';
+  element: InstanceNode | ComponentNode | GroupNode | FrameNode;
   name: string;
+  type: string;
   extension: string;
   fullName: string;
-
-  static checkPattern(fullName: string): boolean {
-    const parts = fullName.split(':');
-    return parts.length == 2;
-  }
+  path: string;
 
   private generateExtension(type: string): string {
     if (type === 'SVG') {
@@ -19,15 +18,36 @@ export class ExportElement {
     return '';
   }
 
-  constructor(fullName: string) {
-    const parts = fullName.split(':');
-    if (parts.length != 2) {
-      throw new Error('invalid format!');
+  constructor(
+    element: InstanceNode | ComponentNode | GroupNode | FrameNode,
+    name: string,
+    type: string,
+    option: ExportOption
+  ) {
+    const fileNameBuilder = [name];
+
+    const suffix = option.suffix;
+
+    if (suffix) {
+      fileNameBuilder.push(suffix);
     }
 
-    this.type = parts[0];
-    this.name = parts[1];
+    this.element = element;
+    this.name = fileNameBuilder.join('');
+    this.type = type;
     this.extension = this.generateExtension(this.type);
     this.fullName = `${this.name}.${this.extension}`;
+
+    const pathBuilder = [];
+
+    const path = option.path;
+
+    if (path) {
+      pathBuilder.push(path);
+    }
+
+    pathBuilder.push(this.fullName);
+
+    this.path = pathBuilder.join('/');
   }
 }

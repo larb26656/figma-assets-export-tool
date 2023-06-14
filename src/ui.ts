@@ -9,7 +9,6 @@ function uintArrayToBlob(uintArray: Uint8Array, format: string) {
     contentType = 'image/png';
   }
 
-  console.log(contentType);
   return new Blob([uintArray], { type: contentType });
 }
 
