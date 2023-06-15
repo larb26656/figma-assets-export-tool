@@ -4,6 +4,10 @@ export class ExportOption {
 
   private constructor() {}
 
+  toString(): string {
+    return `[path=${this.path}, suffix=${this.suffix}]`;
+  }
+
   static checkIsHaveFlag(elementName: string): boolean {
     return elementName === '$EXPORT_OPTION';
   }
