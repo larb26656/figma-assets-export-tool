@@ -1,8 +1,8 @@
 import { UIConnector } from '../../bridge/ui/ui-connector';
-import { ExportTaskPercentage } from './export-task-percentage';
 import { ExportElement } from './model/export-element';
 import { ExportElementConfig } from './model/export-element-config';
 import { ExportOption } from './model/export-option';
+import { ExportTaskPercentage } from './model/export-task-percentage';
 
 export namespace ExportTask {
   async function generateExportAssetDetail(exportElement: ExportElement): Promise<ExportAssetDetail> {

@@ -2,7 +2,7 @@ import JSZip from 'jszip';
 import { BackendConnector } from './bridge/backend/backend-connector';
 import { UIConnectorEvent } from './bridge/ui/ui-connector.event';
 import './style/base.css';
-import { ExportTaskPercentage } from './task/export/export-task-percentage';
+import { ExportTaskPercentage } from './task/export/model/export-task-percentage';
 
 function setVisibleWorkProgressBar(show: boolean) {
   const progress = document.getElementById('work-progress-bar');
