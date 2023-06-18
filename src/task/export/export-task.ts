@@ -95,6 +95,10 @@ export namespace ExportTask {
     return assets;
   }
 
+  function getFrameFromSection(section: SectionNode): FrameNode[] {
+    return section.children.filter(child => child.type === 'FRAME').map(child => child as FrameNode);
+  }
+
   export async function excute() {
     UIConnector.updateWorkProgress(ExportTaskPercentage.start);
     console.log('Start export...');
@@ -103,8 +107,15 @@ export namespace ExportTask {
     UIConnector.updateWorkProgress(ExportTaskPercentage.findExportFrame);
 
     const frames = currentPage.children
-      .filter(child => child && child.type == 'FRAME')
-      .map(child => child as FrameNode);
+      .filter(child => (child && child.type === 'FRAME') || child.type === 'SECTION')
+      .map(child => {
+        if (child.type === 'FRAME') {
+          return child as FrameNode;
+        } else if (child.type === 'SECTION') {
+          return getFrameFromSection(child);
+        }
+      })
+      .flat();
 
     if (!frames.length) {
       figma.notify('No one frame in this page!');
