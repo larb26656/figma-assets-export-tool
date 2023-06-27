@@ -9,6 +9,7 @@ figma.ui.onmessage = async msg => {
       await ExportTask.excute();
     }
   } catch (err) {
+    console.error(err);
     figma.closePlugin(`Error cause ${err.stack}`);
   }
 };

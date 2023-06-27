@@ -1,3 +1,4 @@
+import { ExportTask } from '../export-task';
 import { ExportElement } from './export-element';
 import { ExportOption } from './export-option';
 
@@ -62,6 +63,13 @@ export class ExportElementConfig {
 
     const [prefix, types] = exportConfigElementName.split(':');
 
-    return new ExportElementConfig(element, JSON.parse(types), elementName);
+    try {
+      return new ExportElementConfig(element, JSON.parse(types), elementName);
+    } catch (err) {
+      console.error(err);
+
+      ExportTask.errorTasks.push(`${element.name} : is wrong name pattern`);
+      return null;
+    }
   }
 }

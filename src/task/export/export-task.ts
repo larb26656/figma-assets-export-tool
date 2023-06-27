@@ -5,6 +5,8 @@ import { ExportOption } from './model/export-option';
 import { ExportTaskPercentage } from './model/export-task-percentage';
 
 export namespace ExportTask {
+  export const errorTasks: string[] = [];
+
   async function generateExportAssetDetail(exportElement: ExportElement): Promise<ExportAssetDetail> {
     let uintArray;
 
@@ -100,6 +102,9 @@ export namespace ExportTask {
   }
 
   export async function excute() {
+    // clear error task
+    this.errorTasks = [];
+
     UIConnector.updateWorkProgress(ExportTaskPercentage.start);
     console.log('Start export...');
     const currentPage = figma.currentPage;
@@ -135,11 +140,19 @@ export namespace ExportTask {
 
     UIConnector.updateWorkProgress(ExportTaskPercentage.generate);
 
+    if (errorTasks.length) {
+      figma.notify(`Error task: ${errorTasks.length} tasks try to seed detail in console log`);
+
+      console.log('This export is has error:');
+      console.log(errorTasks);
+    }
     if (!assets.length) {
       figma.notify('No assets found!');
+
       UIConnector.updateWorkProgress(ExportTaskPercentage.start);
     } else {
       figma.notify(`Found assets: ${assets.length} files`);
+
       UIConnector.showDownloadBtn(assets);
     }
   }
